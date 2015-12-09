@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>Registration</title>
+  </head>
+  <body>
+    <form method=post>
+      <dl>
+        <dt>Username:
+        <dd><input type=text pattern=".{3,}" required title="minimum 3 symbols" name=username>
+        <dt>First Name:
+        <dd><input type=text name=firstname>
+        <dt>Last Name:
+        <dd><input type=text name=lastname>
+        <dt>E-Mail:
+        <dd><input type=email required name=email>
+        <dt>Phone:
+        <dd><input type=tel name=phone>
+        <dt>Password:
+        <dd><input type=password pattern=".{4,}" required title="minimum 4 symbols" name=password>
+      </dl>
+      <dd><input type=submit value=Register>
+    </form>
+  </body>
+</html>

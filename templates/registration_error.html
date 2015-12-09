@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>Failure</title>
+  </head>
+  <body>
+    <p><b>Registration has ended in failure</b><br>
+    {% if reason %}
+      <h1>Reason - <b>{{ reason }}</b></h1>
+    {% else %}
+      <h1>Reason unknown</h1>
+    {% endif %}
+  </body>
+</html>
