@@ -74,6 +74,7 @@ def authorize():
 	
 	code = uuid.uuid4().hex
 	cursor.execute("INSERT INTO authorization VALUES (?,?,?)", (user[0], code, datetime.now() + timedelta(seconds=600)))
+	db.commit()
 	
 	return redirect(client[2] + '?code=' + code + ('' if state is None else '&state=' + state), code=302)
 	
@@ -255,13 +256,13 @@ def post_personnel(item_id):
 	department = cursor.fetchone()
 	
 	if (department is None):
-		return '', 422
+		return '', 400
 	
 	cursor.execute("INSERT INTO personnel VALUES (?,?,?,?,?)", (item_id, newempl['firstname'], newempl['lastname'], newempl['hiredate'], newempl['occupation']))
 	db.commit()
 	
 	return '', 201, {
-		'Location': '/personnel/{}'.format(id),
+		'Location': '/personnel/{}'.format(item_id),
 		'Content-Type': 'application/json;charset=UTF-8'
 	}
 
@@ -283,7 +284,7 @@ def put_personnel(item_id):
 	department = cursor.fetchone()
 	
 	if (department is None):
-		return '', 422
+		return '', 400
 	
 	cursor.execute("UPDATE personnel SET firstname = ?, lastname = ?, hiredate = ?, occupation = ? WHERE id = ?", (newempl['firstname'], newempl['lastname'], newempl['hiredate'], newempl['occupation'], item_id))
 	db.commit()
@@ -379,7 +380,7 @@ def post_department(class_id):
 	db.commit()
 	
 	return '', 201, {
-		'Location': '/departments/{}'.format(id),
+		'Location': '/departments/{}'.format(class_id),
 		'Content-Type': 'application/json;charset=UTF-8'
 	}
 
